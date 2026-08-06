@@ -168,7 +168,7 @@ nav {
   row-gap: 15px;
   column-gap: 15px;
   width: calc(100% - 4rem);
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -183,16 +183,16 @@ nav {
   display: block;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .paintings-container {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 500px;
   }
 }
+
 @media (max-width: 500px) {
   .paintings-container {
     grid-template-columns: 1fr;
-    width: 70%;
+    width: 90%;
   }
 }
 .schedule-image {
@@ -275,9 +275,10 @@ a:hover {
   flex-direction: column;
   min-height: 100vh;
   background-color: #810808;
-  background-image: url("../assets/11.jpg");
+  background-image: url("../assets/4.jpg");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
+  background-size: cover;
   background-attachment: fixed;
   background-blend-mode: multiply;
 }
@@ -307,13 +308,16 @@ p {
 @media (max-width: 768px) {
   .all-all {
     background-image: url("../assets/12.jpg");
+    background-size: cover;
+    background-position: center center;
   }
   .all {
-    padding: 0 1rem;
+    padding: 0rem 1rem 1rem 1rem;
     gap: 1.5rem;
   }
   p {
     width: 100%;
+    font-size: 1.25rem;
   }
 }
 
