@@ -139,8 +139,8 @@ nav {
   }
 }
 .about-image {
-  height: 35vh;
-  width: 45vw;
+  height: 28vh;
+  width: 38vw;
 }
 .about-image img {
   object-fit: cover;
