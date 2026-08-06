@@ -208,8 +208,8 @@ nav {
 
 @media (max-width: 768px) {
   .schedule-image {
-    width: 70vw;
-    height: 60vw;
+    width: 80vw;
+    height: 40vw;
   }
   .schedule-image img {
     object-fit: cover;
