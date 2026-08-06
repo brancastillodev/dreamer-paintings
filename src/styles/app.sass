@@ -40,9 +40,10 @@ a:hover
   flex-direction: column
   min-height: 100vh
   background-color: $fondo
-  background-image: url("../assets/11.jpg")
+  background-image: url("../assets/12.jpg")
   background-repeat: no-repeat
-  background-position: center
+  background-position: center center
+  background-size: cover
   background-attachment: fixed
   background-blend-mode: multiply
 
@@ -69,10 +70,13 @@ p
 @media (max-width: 768px)
   .all-all
     background-image: url("../assets/12.jpg")
+    background-size: cover
+    background-position: center center
 
   .all
-    padding: 0 1rem
+    padding: 0rem 1rem 1rem 1rem
     gap: 1.5rem
   
   p
     width:100%
+    font-size: 1.25rem
