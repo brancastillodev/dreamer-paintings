@@ -15,7 +15,7 @@ function Paint({ painting, tiny }) {
       />
       {open && (
         <div
-          onClick={() => window.open(fullUrl, "_blank")}
+          onClick={() => setOpen(false)}
           style={{
             position: "fixed",
             top: 0,
@@ -33,10 +33,15 @@ function Paint({ painting, tiny }) {
           <img
             src={fullUrl}
             alt="Dreamer Paintings"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(fullUrl, "_blank");
+            }}
             style={{
               maxWidth: "90vw",
               maxHeight: "90vh",
               objectFit: "contain",
+              cursor: "pointer",
             }}
           />
           <button
