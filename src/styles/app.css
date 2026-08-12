@@ -275,7 +275,7 @@ a:hover {
   flex-direction: column;
   min-height: 100vh;
   background-color: #810808;
-  background-image: url("../assets/12.jpg");
+  background-image: url("../assets/4.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -307,7 +307,7 @@ p {
 
 @media (max-width: 768px) {
   .all-all {
-    background-image: url("../assets/12.jpg");
+    background-image: url("../assets/4.jpg");
     background-size: cover;
     background-position: center center;
   }
