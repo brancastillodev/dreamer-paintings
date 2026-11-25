@@ -1,8 +1,29 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 function Paint({ painting, tiny }) {
   const [open, setOpen] = useState(false);
+  const closeBtnRef = useRef(null);
   const fullUrl = `https://dreamer-paintings.vercel.app/${painting}`;
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    // Evita que el fondo scrollee mientras el modal está abierto.
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   return (
     <div className="painting">
@@ -13,59 +34,36 @@ function Paint({ painting, tiny }) {
         onClick={() => setOpen(true)}
         style={{ cursor: "pointer" }}
       />
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.9)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-            cursor: "pointer",
-          }}
-        >
-          <img
-            src={fullUrl}
-            alt="Dreamer Paintings"
+      {open &&
+        createPortal(
+          <div
+            className="paint-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Dreamer Paintings"
             onClick={(e) => {
-              e.stopPropagation();
-              window.open(fullUrl, "_blank");
-            }}
-            style={{
-              maxWidth: "90vw",
-              maxHeight: "90vh",
-              objectFit: "contain",
-              cursor: "pointer",
-            }}
-          />
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpen(false);
-            }}
-            style={{
-              position: "absolute",
-              top: "1rem",
-              right: "1rem",
-              background: "white",
-              border: "none",
-              fontSize: "1.5rem",
-              cursor: "pointer",
-              borderRadius: "50%",
-              width: "2.5rem",
-              height: "2.5rem",
+              // Solo cierra si el click fue en el fondo, no en la pintura ni en la X.
+              if (e.target === e.currentTarget) setOpen(false);
             }}
           >
-            ✕
-          </button>
-        </div>
-      )}
+            <img
+              className="paint-modal__image"
+              src={fullUrl}
+              alt="Dreamer Paintings"
+              onClick={() => window.open(fullUrl, "_blank", "noopener,noreferrer")}
+            />
+            <button
+              ref={closeBtnRef}
+              type="button"
+              className="paint-modal__close"
+              aria-label="Cerrar"
+              onClick={() => setOpen(false)}
+            >
+              ✕
+            </button>
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
